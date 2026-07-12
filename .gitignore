@@ -1,0 +1,7 @@
+# generated / large runtime artifacts (not source of truth)
+fleet_rag_store.json
+*.db
+*.db-journal
+__pycache__/
+*.pyc
+/tmp/
