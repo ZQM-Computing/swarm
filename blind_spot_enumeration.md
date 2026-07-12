@@ -40,20 +40,18 @@ B3. Session consolidation silently collapses history.
 CLASS 2 — FLEET STATE BLIND SPOTS  (5 items, B4–B8) — curl-verified 2026-07-12
 ================================================================================
 
-B4. [CRITICAL] Node-1 agent stack has NO autostart task (will not survive reboot).
-    Status: OPEN / CONFIRMED (task absent; stack currently manually-up)
-    Proof (re-verified 2026-07-12 after this doc drafted):
-      - Get-ScheduledTask for ZQM/Stack/Autostart -> NONE FOUND (204 tasks, zero match).
-      - apply_stability.ps1 was attempted via `Start-Process -Verb RunAs -Wait`
-        (proper UAC channel); the elevation did NOT register the task. NOT silently
-        claimed as done.
-      - Live stack RIGHT NOW: :8400 ZBit=404 (UP, responding), :4001 LiteLLM=200 (UP),
-        :11434 Ollama=200 (UP). So the stack is currently running but was launched
-        MANUALLY (or by a one-off), NOT by a persistent task. It will die on the next
-        reboot because no AtStartup task exists.
+B4. [CRITICAL] Node-1 ZBit+LiteLLM+Ollama stack has NO autostart (will not survive reboot).
+    Status: OPEN / CONFIRMED (no task/service covers the ZBit stack; stack currently manually-up)
+    Proof (re-verified 2026-07-12 live):
+      - No Windows service and no scheduled task references ollama/zbit/litellm/zqm/
+        hermes/swarm. SpaceAgentTask[Ready,Boot] exists but runs SpaceAgent.exe
+        (system telemetry, NOT the ZBit stack) — earlier "no task at all" was imprecise.
+      - apply_stability.ps1 is a MANUAL fallback (not registered as an AtStartup task).
+      - Live stack RIGHT NOW: :8400 ZBit=200 (UP), :4001 LiteLLM=200 (UP),
+        :11434 Ollama=200 (UP). Running but launched MANUALLY, NOT by a persistent
+        task -> dies on next reboot.
     Impact: every reboot silently kills the agent brain (ZBit+LiteLLM) until manual
-      re-launch. The "currently down" symptom in the first draft was transient — the
-      durable gap is the missing autostart, not a perpetual outage.
+      re-launch. The durable gap is the missing autostart, not a perpetual outage.
     Closure: operator runs the elevated apply_stability.ps1 (see checklist B4).
 
 B5. N2 (.21) Ollama + Redis: host OFF or unreachable.
@@ -67,11 +65,14 @@ B6. N3 (.46) Ollama: localhost-only by design, but host reachability now 000.
     Proof: curl :11434 -> 000. Audit says localhost-bound (LAN-closed) — consistent,
       but N1 cannot distinguish "intentional localhost" from "host down" without cred.
 
-B7. N4 (.215) Ollama LAN-exposed, 45 models, OPEN — root cause UNKNOWN.
+B7. N4 (.215) Ollama LAN-exposed, 46 models, OPEN — root cause INFERRED (Ollama default
+    binds 0.0.0.0:11434; no OLLAMA_HOST pin visible from N1). Unconfirmed on-host
+    (no N4 local-admin cred).
     Status: OPEN (exposure live)
-    Proof: curl :11434 -> 200 (UP, exposed). Door-B Node-4 zqmlocal cred was
-      REJECTED ("No authentication methods available"). WHY it is LAN-open is
-      undetermined. Security exposure is live.
+    Proof: curl :11434 -> 200 (UP, exposed, 46 models). Door-B Node-4 zqmlocal cred was
+      REJECTED ("No authentication methods available"). WHY it is LAN-open is inferred
+      as the default bind, but undetermined with certainty without N4 access. Security
+      exposure is live.
 
 B8. Inference SPOF — LiteLLM routes 3/4 to N2; N2 currently unreachable from N1
     (probe timeout 2026-07-12) => those routes degraded/dead when N2 down.
