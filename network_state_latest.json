@@ -1,0 +1,150 @@
+{
+  "generated": "2026-07-12T19:31",
+  "segment": "192.168.1.0/24",
+  "host": "192.168.1.218",
+  "total_hosts": 63,
+  "fleet_in_arp": {
+    "192.168.1.218": {
+      "node": "N1",
+      "mac": null
+    },
+    "192.168.1.21": {
+      "node": "N2",
+      "mac": "E8-65-38-ED-95-AD"
+    },
+    "192.168.1.46": {
+      "node": "N3",
+      "mac": "8C-17-59-79-BC-DD"
+    },
+    "192.168.1.215": {
+      "node": "N4",
+      "mac": "F0-D4-15-E4-30-4A"
+    }
+  },
+  "oui_groups": {
+    "01-00-5E": {
+      "count": 13,
+      "vendor": "?"
+    },
+    "90-09-D0": {
+      "count": 9,
+      "vendor": "Synology"
+    },
+    "FF-FF-FF": {
+      "count": 5,
+      "vendor": "?"
+    },
+    "6C-BF-B5": {
+      "count": 4,
+      "vendor": "AzureWave/AP"
+    },
+    "B0-B3-53": {
+      "count": 3,
+      "vendor": "AzureWave/AP"
+    },
+    "20-67-E0": {
+      "count": 2,
+      "vendor": "Unknown"
+    },
+    "D8-EC-5E": {
+      "count": 2,
+      "vendor": "?"
+    },
+    "A0-36-BC": {
+      "count": 2,
+      "vendor": "Intel"
+    },
+    "4C-AB-F8": {
+      "count": 1,
+      "vendor": "HUAWEI TECH"
+    },
+    "B0-8B-A8": {
+      "count": 1,
+      "vendor": "Unknown"
+    },
+    "E8-65-38": {
+      "count": 1,
+      "vendor": "CLOUD NETWORK TECH SINGAPORE"
+    },
+    "8C-17-59": {
+      "count": 1,
+      "vendor": "ASUSTek"
+    },
+    "58-41-46": {
+      "count": 1,
+      "vendor": "?"
+    },
+    "00-11-32": {
+      "count": 1,
+      "vendor": "?"
+    },
+    "F8-54-F6": {
+      "count": 1,
+      "vendor": "?"
+    },
+    "84-EA-ED": {
+      "count": 1,
+      "vendor": "?"
+    },
+    "DA-1D-5A": {
+      "count": 1,
+      "vendor": "?"
+    },
+    "F8-0F-F9": {
+      "count": 1,
+      "vendor": "?"
+    },
+    "10-59-32": {
+      "count": 1,
+      "vendor": "?"
+    },
+    "7C-4D-8F": {
+      "count": 1,
+      "vendor": "?"
+    },
+    "60-DC-81": {
+      "count": 1,
+      "vendor": "?"
+    },
+    "68-13-F3": {
+      "count": 1,
+      "vendor": "?"
+    },
+    "84-3E-1D": {
+      "count": 1,
+      "vendor": "?"
+    },
+    "B2-73-89": {
+      "count": 1,
+      "vendor": "?"
+    },
+    "B8-27-EB": {
+      "count": 1,
+      "vendor": "?"
+    },
+    "10-7C-61": {
+      "count": 1,
+      "vendor": "?"
+    },
+    "E0-D3-62": {
+      "count": 1,
+      "vendor": "?"
+    },
+    "D4-E2-2F": {
+      "count": 1,
+      "vendor": "?"
+    },
+    "F0-D4-15": {
+      "count": 1,
+      "vendor": "Intel"
+    },
+    "9C-C8-E9": {
+      "count": 1,
+      "vendor": "?"
+    },
+    "00-15-5D": {
+      "count": 1,
+      "vendor": "?"
+    }
+  }
+}
