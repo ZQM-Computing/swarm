@@ -16,11 +16,11 @@ B1. session_search hides 95.7% of interactive chats. Browse returned exactly 3 s
 B2. The monitoring dashboard is invisible to its own search tool. drift-watch cron dominates browse so you cannot discover the monitor via session_search.
 B3. Session consolidation silently collapses history. 60 subagent sessions carry parent_session_id (nested); 3 phantom 0-message sessions.
 CLASS 2 - FLEET STATE BLIND SPOTS (5 items, B4-B8)
-B4. [CRITICAL] Node-1 agent stack has NO autostart task (will not survive reboot). Get-ScheduledTask for ZQM/Stack/Autostart -> NONE FOUND. apply_stability.ps1 via UAC did NOT register. Live: :8400=000 :4001=000 :11434=200.
+B4. [CRITICAL] Node-1 ZBit+LiteLLM+Ollama stack has NO autostart (will not survive reboot). SpaceAgentTask[Ready,Boot] exists but runs SpaceAgent.exe (system telemetry, NOT the ZBit stack); no service/task references ollama/zbit/litellm/zqm/hermes/swarm. apply_stability.ps1 is manual-only. Live: :8400=200 :4001=200 :11434=200.
 B5. N2 (.21) Ollama + Redis: host OFF or unreachable. curl :11434 -> 000. Redis requirepass set from N1 (RCE closed) but bind/protected-mode GATED on N2 break-glass cred.
 B6. N3 (.46) Ollama: localhost-only by design, but host reachability now 000. Ambiguous without N3 cred.
-B7. N4 (.215) Ollama LAN-exposed, 45 models, OPEN - root cause UNKNOWN. zqmlocal cred REJECTED. Security exposure live.
-B8. Inference SPOF - LiteLLM routes 3/4 to N2; N2 dark => those routes dead. No cross-node failover.
+B7. N4 (.215) Ollama LAN-exposed, 46 models, OPEN - root cause INFERRED (Ollama default binds 0.0.0.0:11434; no OLLAMA_HOST pin visible from N1). Unconfirmed on-host (no N4 cred). Security exposure live.
+B8. Inference SPOF - LiteLLM routes 3/4 to N2; N2 unreachable from N1 this pass (probe timeout) => those routes degraded/dead when N2 down. No cross-node failover.
 CLASS 3 - REMEDIATION PIPELINE BLIND SPOTS (4 items, B9-B12)
 B9. 16 OPEN questions in audit ledger never delivered as a classified list. open_questions = 27 total, 11 resolved, 16 OPEN.
 B10. 4 reliability items: 1 PRIMARY gap (B4) + 3 GATED/CONSENT.
