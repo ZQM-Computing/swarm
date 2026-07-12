@@ -19,9 +19,12 @@ import subprocess, os, sys, json, time, datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 PY = "C:/Users/zqmco/AppData/Local/Programs/Python/Python312/python.exe"
+BASH = "C:/Users/zqmco/AppData/Local/Programs/Git/usr/bin/bash.EXE"
 
 def _run(script, args, timeout=180):
-    cmd = [PY, os.path.join(HERE, script)] + args
+    path = os.path.join(HERE, script)
+    # pick interpreter by extension: .sh -> bash, else python
+    cmd = ([BASH, path] if script.endswith(".sh") else [PY, path]) + args
     t0 = time.time()
     try:
         r = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout,
