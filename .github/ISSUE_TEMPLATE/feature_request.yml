@@ -1,0 +1,17 @@
+name: Feature request
+description: Suggest an idea for ZQM
+title: "[FEATURE] "
+labels: ["enhancement"]
+body:
+- type: textarea
+  attributes:
+    label: Is your feature request related to a problem?
+    description: A clear description of the problem.
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: Describe the solution
+    description: A clear description of what you want.
+  validations:
+    required: true
