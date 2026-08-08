@@ -1,0 +1,39 @@
+name: fulfill
+on:
+  issues:
+    types: [labeled]
+  issue_comment:
+    types: [created]
+
+jobs:
+  fulfill:
+    if: |
+      (github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'purchase')) ||
+      (github.event_name == 'issue_comment' && (contains(github.event.issue.labels.*.name, 'purchase') || contains(github.event.issue.labels.*.name, 'subscription')) && !contains(github.event.issue.labels.*.name, 'fulfilled'))
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install toolchain
+        run: |
+          pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Check secrets
+        run: |
+          if [ -z "${{ secrets.SMTP_HOST }}" ] || [ -z "${{ secrets.SMTP_PORT }}" ] || [ -z "${{ secrets.SMTP_USER }}" ] || [ -z "${{ secrets.SMTP_PASS }}" ] || [ -z "${{ secrets.EMAIL_FROM }}" ]; then
+            echo "::error::Missing required SMTP/email secrets: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, EMAIL_FROM"
+            exit 1
+          fi
+      - name: Run fulfillment bot
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+          RELEASE_URL: https://github.com/ZQM-Labs/zqm-attestation-toolkit/releases/latest/download/zqm_attestation_release_package.zip
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+        run: python scripts/fulfill_bot.py
