@@ -1,3 +1,6 @@
 [lint]
 ignore = ["E501"]
 select = ["E", "F", "I", "PIE", "PLW", "RUF"]
+
+[tool.ruff]
+line-length = 100
