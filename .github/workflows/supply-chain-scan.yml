@@ -27,10 +27,7 @@ jobs:
           python -c "import urllib.request; urllib.request.urlretrieve('https://raw.githubusercontent.com/ZQM-Labs/zqm-supply-chain-scanner/main/snyk_replacement.py', 'snyk_replacement.py')"
       - name: Run scan
         run: |
-          python snyk_replacement.py \
-            --repo ${{ github.repository }} \
-            --output both \
-            --pr ${{ github.event.pull_request.number || 0 }}
+          python snyk_replacement.py             --repo ${{ github.repository }}             --output both             --pr ${{ github.event.pull_request.number || 0 }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload SARIF
