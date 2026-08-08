@@ -1,7 +1,5 @@
 [lint]
-ignore = [
-  "E501",
-]
+ignore = ["E501"]
 select = ["E", "F", "I", "PIE", "PLW", "RUF"]
 
 [tool.ruff]
