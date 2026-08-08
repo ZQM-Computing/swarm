@@ -1,6 +1,6 @@
 [lint]
 ignore = [
-  "E501",  # Line too long - many docstrings exceed 88 chars
+  "E501",
 ]
 select = ["E", "F", "I", "PIE", "PLW", "RUF"]
 
