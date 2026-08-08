@@ -36,7 +36,7 @@ jobs:
           sarif_file: .zqm-security-reports/${{ github.repository }}/$(date -u +%Y%m%dT%H%M%SZ)-results.sarif
         if: always()
       - name: Upload findings artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: supply-chain-scan-${{ github.run_id }}
           path: .zqm-security-reports/${{ github.repository }}/
