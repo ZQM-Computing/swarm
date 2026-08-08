@@ -17,7 +17,13 @@ Endpoints
 
 Run:  python api_server.py [--port 8088] [--host 127.0.0.1]
 """
-import json, sys, argparse, urllib.request, time, os, datetime
+import json
+import sys
+import argparse
+import urllib.request
+import time
+import os
+import datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from claims_core import build_attestation, build_sitrep, build_open_questions
 
