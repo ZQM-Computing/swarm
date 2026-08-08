@@ -1,6 +1,3 @@
-# SECURITY
+# Security Policy
 
-## Note
-Standard documentation scaffold.
-
-Contact: zqmcomputing@gmail.com
+Report vulnerabilities via GitHub Security Advisories.
