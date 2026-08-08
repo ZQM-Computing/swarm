@@ -9,6 +9,8 @@ exclude = [
     ".tmp",
     "**/Python/**",
 ]
+
+[lint]
 select = ["E", "F", "I", "PIE", "PLW", "RUF"]
 ignore = [
     "E501",
@@ -21,7 +23,8 @@ ignore = [
     "PIE810",
     "PLW1510",
     "E401",
+    "E741",
 ]
 
-[isort]
+[lint.isort]
 known-first-party = ["zqm"]
