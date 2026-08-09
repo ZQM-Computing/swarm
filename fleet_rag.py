@@ -6,7 +6,7 @@ Source doc is inlined to avoid the MSYS/Win32 filesystem-view split on this host
 import json, re, urllib.request, os, sys
 
 EMB = "fleet_rag_store.json"
-EMBED_URL = "http://192.168.1.218:11434/api/embed"
+EMBED_URL = os.environ.get("OLLAMA_EMBED_URL", "http://192.168.1.218:11434/api/embed")
 MODEL = "nomic-embed-text"
 
 DOC = r"""

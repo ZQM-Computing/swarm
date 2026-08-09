@@ -21,8 +21,8 @@ import json, sys, argparse, urllib.request, time, os, datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from claims_core import build_attestation, build_sitrep, build_open_questions
 
-OLLAMA_URL = "http://192.168.1.218:11434/api/generate"
-OLLAMA_MODEL = "qwen3:8b"
+OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://192.168.1.218:11434/api/generate")
+OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "qwen3:8b")
 
 # M2: TTL cache for both slow probe-driven builders. 60s freshness.
 _SITREP_CACHE = {"ts": 0, "data": None}
