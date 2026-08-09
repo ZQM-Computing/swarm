@@ -1,7 +1,7 @@
 {
-  "generated": "2026-07-12T19:31",
+  "generated": "2026-08-09T07:25",
   "segment": "192.168.1.0/24",
-  "host": "192.168.1.218",
+  "host": "ZQM-Node-3",
   "total_hosts": 63,
   "fleet_in_arp": {
     "192.168.1.218": {
@@ -145,6 +145,33 @@
     "00-15-5D": {
       "count": 1,
       "vendor": "?"
+    }
+  },
+  "observed_from_n3": {
+    "timestamp": "2026-08-09T07:25",
+    "void_node": "192.168.1.78",
+    "services": {
+      "5000": {
+        "service": "Desktop File Indexer (Waitress/Python)",
+        "host": "192.168.1.224",
+        "status": "up"
+      },
+      "8808": {
+        "service": "The Void AI Orchestration System v2.1.4",
+        "host": "192.168.1.78",
+        "status": "online",
+        "auth_required": true
+      },
+      "11434": {
+        "service": "Ollama",
+        "host": "192.168.1.78",
+        "status": "running"
+      },
+      "8891": {
+        "service": "zqm-quantum-api (docker)",
+        "host": "192.168.1.78",
+        "status": "up"
+      }
     }
   }
 }
